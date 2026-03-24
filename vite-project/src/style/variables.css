@@ -1,0 +1,29 @@
+:root {
+  /* Светлая тема (по умолчанию) */
+  --bg-main: #f4f7f6;
+  --bg-card: #ffffff;
+  --bg-header: rgba(255, 255, 255, 0.8);
+  --text-main: #2d3436;
+  --text-muted: #636e72;
+  --accent: #3498db;
+  --accent-hover: #2980b9;
+  --border-color: #f1f2f6;
+  --input-bg: #f9f9fb;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --modal-overlay: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='dark'] {
+  /* Темная тема */
+  --bg-main: #121212;
+  --bg-card: #1e1e1e;
+  --bg-header: rgba(30, 30, 30, 0.8);
+  --text-main: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --accent: #3498db;
+  --accent-hover: #5dade2;
+  --border-color: #333333;
+  --input-bg: #2d2d2d;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --modal-overlay: rgba(0, 0, 0, 0.8);
+}

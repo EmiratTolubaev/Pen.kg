@@ -1,0 +1,77 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-top: 10px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #636e72;
+  margin-left: 4px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #f1f2f6;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  outline: none;
+  background-color: #f9f9fb;
+}
+
+.form-input:focus {
+  border-color: #3498db;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15);
+}
+
+.form-input::placeholder {
+  color: #b2bec3;
+}
+
+/* Кнопка отправки */
+.btn-submit {
+  margin-top: 10px;
+  padding: 14px;
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #3498db;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.auth-switch:hover {
+  text-decoration: underline;
+}

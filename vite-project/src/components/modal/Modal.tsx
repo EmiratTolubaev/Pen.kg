@@ -5,11 +5,11 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  children: ReactNode; // Сюда будет попадать любая форма
+  children: ReactNode;
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
-  if (!isOpen) return null; // Если закрыто — ничего не рендерим
+  if (!isOpen) return null;
 
   return (
     <div className="modal-overlay" onClick={onClose}>

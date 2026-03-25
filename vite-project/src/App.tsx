@@ -3,6 +3,7 @@ import './App.css'
 import Header from './components/header/Header'
 import Modal from './components/modal/Modal';
 import { LoginForm, RegisterForm } from './components/authForms/AuthForms';
+import { ThemeProvider } from './typescript/ThemeContext';
 
 function App() {
 
@@ -21,21 +22,23 @@ function App() {
 
   return (
     <>
-<Header 
-        isLoggedIn={false} 
-        cartCount={1} 
-        onLogin={openLogin} 
-        onRegister={openRegister}
-        onNavigateToCart={() => {}}
-        onNavigateToProfile={() => {}}
-      />
-<Modal 
-        isOpen={isModalOpen} 
-        onClose={() => setModalOpen(false)} 
-        title={modalType === 'login' ? 'Вход в Pen.kg' : 'Регистрация'}
-      >
-        {modalType === 'login' ? <LoginForm /> : <RegisterForm />}
-      </Modal>
+    <ThemeProvider>
+  <Header 
+          isLoggedIn={false} 
+          cartCount={1} 
+          onLogin={openLogin} 
+          onRegister={openRegister}
+          onNavigateToCart={() => {}}
+          onNavigateToProfile={() => {}}
+        />
+  <Modal 
+    isOpen={isModalOpen} 
+    onClose={() => setModalOpen(false)} 
+    title={modalType === 'login' ? 'Вход' : 'Регистрация'}
+  >
+    {modalType === 'login' ? <LoginForm /> : <RegisterForm />}
+  </Modal>  
+  </ThemeProvider>
     </>
   )
 }

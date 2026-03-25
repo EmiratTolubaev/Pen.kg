@@ -1,57 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
+import { useTheme } from '../../typescript/ThemeContext';
 
 interface HeaderProps {
   isLoggedIn: boolean;
-  userName?: string;
-  onLogin?: () => void;
-  onRegister?: () => void;
-  onLogout?: () => void;
+  cartCount: number;
+  onLogin: () => void;
+  onRegister: () => void;
+  onNavigateToProfile: () => void;
+  onNavigateToCart: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ 
   isLoggedIn, 
-  userName, 
+  cartCount, 
   onLogin, 
   onRegister, 
-  onLogout 
+  onNavigateToProfile, 
+  onNavigateToCart 
 }) => {
+  // const [isDark, setIsDark] = useState(false);
+
+  // const toggleTheme = () => {
+  //   const newTheme = !isDark ? 'dark' : 'light';
+  //   setIsDark(!isDark);
+  //   document.documentElement.setAttribute('data-theme', newTheme);
+  // };
+
+  const { theme, toggleTheme } = useTheme(); // Берем глобальную тему
+
   return (
     <header className="header">
       <div className="header-container">
-        {/* Логотип и Название */}
-        <div className="logo-section">
-          <div className="logo-icon">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13.5 3L21 10.5L7.5 24H0V16.5L13.5 3Z" fill="currentColor"/>
-              <path d="M17 6.5L19.5 9" stroke="white" strokeWidth="2"/>
-            </svg>
+        {/* Левая часть: Логотип */}
+        <div className="header-left">
+          <div className="logo-section" onClick={() => window.location.href = '/'}>
+            <div className="logo-icon">✒️</div>
+            <h1 className="brand-name">Pen<span>.kg</span></h1>
           </div>
-          <h1 className="brand-name">Pen<span>.kg</span></h1>
+
+          {/* Навигация (вернули и дополнили) */}
+          <nav className="nav-menu">
+            <a href="/catalog">Каталог</a>
+            <a href="/new">Новинки</a>
+            <a href="/about">О нас</a>
+          </nav>
         </div>
 
-        {/* Навигация */}
-        <nav className="nav-menu">
-          <a href="/">Каталог</a>
-          <a href="/about">О нас</a>
-        </nav>
+        {/* Правая часть: Интерфейс и Тема */}
+        <div className="header-right">
+          <div className="auth-section">
+            {isLoggedIn ? (
+              <div className="user-actions">
+                <button className="icon-btn" onClick={onNavigateToCart} title="Корзина">
+                  <span>🛒</span>
+                  {cartCount > 0 && <span className="badge">{cartCount}</span>}
+                </button>
+                <button className="icon-btn" onClick={onNavigateToProfile} title="Профиль">
+                  <span>👤</span>
+                </button>
+              </div>
+            ) : (
+              <div className="auth-buttons">
+                <button onClick={onLogin} className="btn-login">Войти</button>
+                <button onClick={onRegister} className="btn-register">Регистрация</button>
+              </div>
+            )}
+          </div>
 
-        {/* Блок авторизации */}
-        <div className="auth-section">
-          {isLoggedIn ? (
-            <div className="user-controls">
-              <span className="welcome-text">Привет, <strong>{userName}</strong></span>
-              <button className="btn-cart">
-                🛒 <span className="cart-count">3</span>
-              </button>
-              <button onClick={onLogout} className="btn-secondary">Выйти</button>
-            </div>
-          ) : (
-            <div className="auth-buttons">
-              <button onClick={onLogin} className="btn-ghost">Войти</button>
-              <button onClick={onRegister} className="btn-primary">Регистрация</button>
-            </div>
-          )}
+          <button className="theme-toggle" onClick={toggleTheme}>
+        {theme === 'dark' ? '☀️' : '🌙'}
+      </button>
         </div>
       </div>
     </header>

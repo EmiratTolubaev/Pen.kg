@@ -11,22 +11,14 @@ interface HeaderProps {
   onNavigateToCart: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ 
-  isLoggedIn, 
-  cartCount, 
-  onLogin, 
-  onRegister, 
-  onNavigateToProfile, 
-  onNavigateToCart 
+const Header: React.FC<HeaderProps> = ({
+  isLoggedIn,
+  cartCount,
+  onLogin,
+  onRegister,
+  onNavigateToProfile,
+  onNavigateToCart,
 }) => {
-  // const [isDark, setIsDark] = useState(false);
-
-  // const toggleTheme = () => {
-  //   const newTheme = !isDark ? 'dark' : 'light';
-  //   setIsDark(!isDark);
-  //   document.documentElement.setAttribute('data-theme', newTheme);
-  // };
-
   const { theme, toggleTheme } = useTheme(); // Берем глобальную тему
 
   return (
@@ -34,9 +26,11 @@ const Header: React.FC<HeaderProps> = ({
       <div className="header-container">
         {/* Левая часть: Логотип */}
         <div className="header-left">
-          <div className="logo-section" onClick={() => window.location.href = '/'}>
+          <div className="logo-section" onClick={() => (window.location.href = '/')}>
             <div className="logo-icon">✒️</div>
-            <h1 className="brand-name">Pen<span>.kg</span></h1>
+            <h1 className="brand-name">
+              Pen<span>.kg</span>
+            </h1>
           </div>
 
           {/* Навигация (вернули и дополнили) */}
@@ -62,15 +56,19 @@ const Header: React.FC<HeaderProps> = ({
               </div>
             ) : (
               <div className="auth-buttons">
-                <button onClick={onLogin} className="btn-login">Войти</button>
-                <button onClick={onRegister} className="btn-register">Регистрация</button>
+                <button onClick={onLogin} className="btn-login">
+                  Войти
+                </button>
+                <button onClick={onRegister} className="btn-register">
+                  Регистрация
+                </button>
               </div>
             )}
           </div>
 
           <button className="theme-toggle" onClick={toggleTheme}>
-        {theme === 'dark' ? '☀️' : '🌙'}
-      </button>
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
         </div>
       </div>
     </header>

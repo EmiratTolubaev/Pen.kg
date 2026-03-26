@@ -8,7 +8,9 @@
   height: 70px;
   display: flex;
   align-items: center;
-  transition: background 0.3s, border 0.3s;
+  transition:
+    background 0.3s,
+    border 0.3s;
 }
 
 .header-container {
@@ -20,7 +22,8 @@
   align-items: center;
 }
 
-.header-left, .header-right {
+.header-left,
+.header-right {
   display: flex;
   align-items: center;
   gap: 30px;

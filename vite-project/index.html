@@ -1,19 +1,32 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>pen</title>
+    <script>
+      (function () {
+        try {
+          const savedTheme = localStorage.getItem('theme');
+          const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = savedTheme || (supportDarkMode ? 'dark' : 'light');
+
+          // Устанавливаем только атрибут!
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- <script>
+      //код нужен для того чтобы помнить тему, на какой был установлен ранее и применять при повторном входе
+      (function () {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      })();
+    </script> -->
   </body>
-  <script>
-  (function() {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  })();
-</script>
 </html>

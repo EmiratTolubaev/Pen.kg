@@ -24,7 +24,7 @@ function App() {
     <>
     <ThemeProvider>
   <Header 
-          isLoggedIn={false} 
+          isLoggedIn={true} 
           cartCount={1} 
           onLogin={openLogin} 
           onRegister={openRegister}

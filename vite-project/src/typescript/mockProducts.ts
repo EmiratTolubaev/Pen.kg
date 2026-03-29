@@ -1,173 +1,24 @@
-export const MOCK_PRODUCTS = [
-  {
-    id: 1,
-    title: 'Ручка гелевая Parker',
-    price: 1500,
-    category: 'Письмо',
-    image: 'https://via.placeholder.com/200x200?text=Parker+Pen',
-    color: 'blue',
-    type: 'pen',
-  },
-  {
-    id: 2,
-    title: 'Тетрадь А5 в клетку',
-    price: 85,
-    category: 'Бумага',
-    image: 'https://via.placeholder.com/200x200?text=Notebook',
-    color: 'green',
-    type: 'notebook',
-  },
-  {
-    id: 3,
-    title: 'Набор маркеров Touch',
-    price: 2400,
-    category: 'Творчество',
-    image: 'https://via.placeholder.com/200x200?text=Markers',
-    color: 'multi',
-    type: 'markers',
-  },
-  {
-    id: 4,
-    title: 'Ежедневник кожаный',
-    price: 1200,
-    category: 'Бумага',
-    image: 'https://via.placeholder.com/200x200?text=Diary',
-    color: 'black',
-    type: 'notebook',
-  },
-  {
-    id: 5,
-    title: 'Карандаши цветные Faber-Castell',
-    price: 500,
-    category: 'Творчество',
-    image: 'https://via.placeholder.com/200x200?text=Colored+Pencils',
-    color: 'multi',
-    type: 'pencil',
-  },
-  {
-    id: 6,
-    title: 'Ручка шариковая Bic',
-    price: 60,
-    category: 'Письмо',
-    image: 'https://via.placeholder.com/200x200?text=Bic+Pen',
-    color: 'black',
-    type: 'pen',
-  },
-  {
-    id: 7,
-    title: 'Скетчбук А4',
-    price: 450,
-    category: 'Творчество',
-    image: 'https://via.placeholder.com/200x200?text=Sketchbook',
-    color: 'white',
-    type: 'notebook',
-  },
-  {
-    id: 8,
-    title: 'Линейка пластиковая 30 см',
-    price: 70,
-    category: 'Принадлежности',
-    image: 'https://via.placeholder.com/200x200?text=Ruler',
-    color: 'transparent',
-    type: 'ruler',
-  },
-  {
-    id: 9,
-    title: 'Корректор-ручка',
-    price: 120,
-    category: 'Письмо',
-    image: 'https://via.placeholder.com/200x200?text=Correction+Pen',
-    color: 'white',
-    type: 'correction',
-  },
-  {
-    id: 10,
-    title: 'Папка на молнии A4',
-    price: 300,
-    category: 'Бумага',
-    image: 'https://via.placeholder.com/200x200?text=Folder',
-    color: 'blue',
-    type: 'folder',
-  },
-  {
-    id: 11,
-    title: 'Маркер перманентный черный',
-    price: 150,
-    category: 'Творчество',
-    image: 'https://via.placeholder.com/200x200?text=Marker',
-    color: 'black',
-    type: 'marker',
-  },
-  {
-    id: 12,
-    title: 'Ножницы канцелярские',
-    price: 200,
-    category: 'Принадлежности',
-    image: 'https://via.placeholder.com/200x200?text=Scissors',
-    color: 'silver',
-    type: 'scissors',
-  },
-  {
-    id: 13,
-    title: 'Скрепки металлические',
-    price: 50,
-    category: 'Принадлежности',
-    image: 'https://via.placeholder.com/200x200?text=Paper+Clips',
-    color: 'silver',
-    type: 'clips',
-  },
-  {
-    id: 14,
-    title: 'Фломастеры Crayola',
-    price: 600,
-    category: 'Творчество',
-    image: 'https://via.placeholder.com/200x200?text=Felt+Pens',
-    color: 'multi',
-    type: 'markers',
-  },
-  {
-    id: 15,
-    title: 'Клей-карандаш Pritt',
-    price: 100,
-    category: 'Принадлежности',
-    image: 'https://via.placeholder.com/200x200?text=Glue+Stick',
-    color: 'white',
-    type: 'glue',
-  },
-  {
-    id: 16,
-    title: 'Ручка перьевая Lamy',
-    price: 2500,
-    category: 'Письмо',
-    image: 'https://via.placeholder.com/200x200?text=Lamy+Pen',
-    color: 'blue',
-    type: 'pen',
-  },
-  {
-    id: 17,
-    title: 'Тетрадь А4 в линейку',
-    price: 90,
-    category: 'Бумага',
-    image: 'https://via.placeholder.com/200x200?text=Notebook+A4',
-    color: 'red',
-    type: 'notebook',
-  },
-  {
-    id: 18,
-    title: 'Кисти для рисования набор',
-    price: 350,
-    category: 'Творчество',
-    image: 'https://via.placeholder.com/200x200?text=Brushes',
-    color: 'wood',
-    type: 'brushes',
-  },
-  {
-    id: 19,
-    title: 'Ежедневник недатированный',
-    price: 800,
-    category: 'Бумага',
-    image: 'https://via.placeholder.com/200x200?text=Diary+Undated',
-    color: 'brown',
-    type: 'notebook',
-  },
-];
+/**
+ * Генерируем массив из 50 объектов товаров.
+ * Используем Array.from для создания массива заданной длины.
+ */
+export const MOCK_PRODUCTS = Array.from({ length: 1001 }).map((_, i) => {
+  // Определяем варианты для разнообразия данных
+  const titles = ['Ручка Parker', 'Тетрадь A5', 'Маркеры Touch', 'Ежедневник', 'Карандаши Faber'];
+  const categories = ['Письмо', 'Бумага', 'Творчество', 'Принадлежности'];
+  const colors = ['blue', 'green', 'red', 'black', 'white', 'multi'];
+  const types = ['pen', 'notebook', 'markers', 'pencil', 'ruler'];
+
+  return {
+    id: i + 1, // Уникальный ID (1, 2, 3...)
+    title: `${titles[i % titles.length]} #${i + 1}`, // Смешиваем название и номер
+    price: Math.floor(Math.random() * (3000 - 50) + 50), // Рандомная цена от 50 до 3000
+    category: categories[i % categories.length],
+    image: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg',
+    color: colors[i % colors.length],
+    type: types[i % types.length],
+    description:
+      'Профессиональный инструмент для тех, кто ценит качество и эстетику Pen.kg. Идеально подходит для ежедневного использования.',
+    features: ['Высокая прочность', 'Эргономичный дизайн', 'Премиум материалы'],
+  };
+});

@@ -8,11 +8,13 @@ interface ProductProps {
   category: string;
   image: string;
   color: string;
+  onOpen: () => void;
 }
 
-const ProductCard: React.FC<ProductProps> = ({ title, price, category, image, color }) => {
+const ProductCard: React.FC<ProductProps> = ({ title, price, image, onOpen, category, color }) => {
   return (
-    <div className="product-card">
+    // Добавляем onClick на главный контейнер карточки
+    <div className="product-card" onClick={onOpen} style={{ cursor: 'pointer' }}>
       <div className="product-image">
         <img src={image} alt={title} />
         <span className="product-tag">{category}</span>

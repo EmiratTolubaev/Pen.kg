@@ -8,21 +8,55 @@ import './Catalog.css';
 
 const ITEMS_PER_PAGE = 8; // Константа: сколько товаров на одной странице
 
+const getUniqueValues = (data: any[], key: string) => {
+  // Map собирает все значения ключа, а Set оставляет только уникальные.
+  // Array.from превращает Set обратно в массив для удобного рендера.
+  return Array.from(new Set(data.map((item) => item[key]))).filter(Boolean);
+};
+
 const Catalog: React.FC = () => {
   // Состояния (State)
   const [searchQuery, setSearchQuery] = useState(''); // Строка поиска
   const [currentPage, setCurrentPage] = useState(1); // Текущая страница
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null); // Выбранный товар для модалки
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedColors, setSelectedColors] = useState<string[]>([]);
 
-  /**
-   * 1. ФИЛЬТРАЦИЯ ПО ПОИСКУ
-   * useMemo кэширует результат. Фильтрация сработает только если изменится searchQuery.
-   */
+  //1. ГЛАВНАЯ ЛОГИКА ФИЛЬТРАЦИИ
+  // Фильтруем массив по поиску + категориям + цветам одновременно.
+  //useMemo кэширует результат. Фильтрация сработает только если изменится searchQuery, selectedCategories, selectedColors.
   const filteredProducts = useMemo(() => {
-    return MOCK_PRODUCTS.filter((p) => p.title.toLowerCase().includes(searchQuery.toLowerCase()));
-  }, [searchQuery]);
+    return MOCK_PRODUCTS.filter((product) => {
+      // Проверка по поиску
+      const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
 
-  /**
+      // Проверка по категориям: если список пуст — подходят все, если нет — только выбранные
+      const matchesCategory =
+        selectedCategories.length === 0 || selectedCategories.includes(product.category);
+
+      // Проверка по цветам
+      const matchesColor = selectedColors.length === 0 || selectedColors.includes(product.color);
+
+      return matchesSearch && matchesCategory && matchesColor;
+    });
+  }, [searchQuery, selectedCategories, selectedColors]);
+
+  // ДИНАМИЧЕСКОЕ ПОЛУЧЕНИЕ СПИСКОВ типов и цветов(Масштабируемость)
+  // Эти списки всегда актуальны, даже если товаров станет 10 000
+  const categories = useMemo(() => getUniqueValues(MOCK_PRODUCTS, 'category'), []);
+  const colors = useMemo(() => getUniqueValues(MOCK_PRODUCTS, 'color'), []);
+
+  //ФУНКЦИИ ОБРАБОТКИ КЛИКОВ фильтрации
+  const toggleFilter = (value: string, state: string[], setState: (v: string[]) => void) => {
+    // Если значение уже в массиве — удаляем, если нет — добавляем.
+    const newState = state.includes(value)
+      ? state.filter((item) => item !== value)
+      : [...state, value];
+    setState(newState);
+    setCurrentPage(1); // Всегда сбрасываем на 1-ю страницу при смене фильтра
+  };
+
+  /*
    * 2. РАСЧЕТ ПАГИНАЦИИ
    */
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
@@ -30,7 +64,6 @@ const Catalog: React.FC = () => {
   // Если после поиска страниц стало меньше, чем текущая (например, была 5, стала 1),
   // используем 1-ю страницу, чтобы не видеть пустой экран.
   const safeCurrentPage = currentPage > totalPages ? 1 : currentPage;
-
   /**
    * 3. НАРЕЗКА МАССИВА (Slicing)
    * Берем только те 8 товаров, которые должны быть на текущей странице.
@@ -68,7 +101,51 @@ const Catalog: React.FC = () => {
               }}
             />
           </div>
-          {/* Здесь в будущем добавим фильтры по цвету/типу */}
+          {/* Динамические Категории */}
+          <div className="filter-group">
+            <h4>Категории</h4>
+            {categories.map((cat) => (
+              <label key={cat} className="filter-checkbox">
+                <input
+                  type="checkbox"
+                  checked={selectedCategories.includes(cat as string)}
+                  onChange={() =>
+                    toggleFilter(cat as string, selectedCategories, setSelectedCategories)
+                  }
+                />
+                {cat}
+              </label>
+            ))}
+          </div>
+
+          {/* Динамические Цвета */}
+          <div className="filter-group">
+            <h4>Цвета</h4>
+            <div className="color-grid">
+              {colors.map((color) => (
+                <button
+                  key={color}
+                  className={`color-option ${selectedColors.includes(color as string) ? 'active' : ''}`}
+                  style={{ backgroundColor: color as string }}
+                  onClick={() => toggleFilter(color as string, selectedColors, setSelectedColors)}
+                  title={color as string}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Кнопка сброса */}
+          {(selectedCategories.length > 0 || selectedColors.length > 0) && (
+            <button
+              className="btn-ghost full-width"
+              onClick={() => {
+                setSelectedCategories([]);
+                setSelectedColors([]);
+              }}
+            >
+              Сбросить фильтры
+            </button>
+          )}
         </aside>
 
         {/* ОСНОВНАЯ ЧАСТЬ */}

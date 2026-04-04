@@ -116,3 +116,50 @@
   border-color: var(--accent);
   color: var(--accent);
 }
+
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.filter-checkbox:hover {
+  color: var(--accent);
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.color-option {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
+}
+
+.color-option.active {
+  border-color: var(--accent);
+  transform: scale(1.2);
+  box-shadow: 0 0 5px var(--accent);
+}
+
+.btn-ghost {
+  margin-top: 20px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}

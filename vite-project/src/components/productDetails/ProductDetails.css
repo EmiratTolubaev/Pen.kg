@@ -87,3 +87,40 @@
     flex-direction: column;
   }
 }
+
+.stock-status {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.in-stock {
+  color: #27ae60; /* Зеленый */
+}
+
+.out-of-stock {
+  color: #e74c3c; /* Красный */
+}
+
+.details-barcode {
+  margin-top: 15px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.details-barcode code {
+  background: var(--bg-main);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--accent);
+  font-family: monospace;
+}
+
+/* Стили для заблокированной кнопки */
+.btn-submit:disabled {
+  background: var(--border-color);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

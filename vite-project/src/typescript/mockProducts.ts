@@ -4,11 +4,22 @@
  */
 export const MOCK_PRODUCTS = Array.from({ length: 1001 }).map((_, i) => {
   // Определяем варианты для разнообразия данных
-  const titles = ['Ручка', 'Тетрадь A5', 'Маркеры Touch', 'Ежедневник', 'Карандаши'];
-  const categories = ['Письмо', 'Бумага', 'Творчество', 'Принадлежности', 'вода'];
+  const titles = ['Ручка', 'Тетрадь A5', 'Маркеры', 'Ежедневник', 'Карандаши'];
+  const categories = [
+    'Письмо',
+    'Бумага',
+    'Творчество',
+    'Принадлежности',
+    'вода',
+    'Ручка',
+    'Тетрадь A5',
+    'Маркеры',
+    'Ежедневник',
+    'Карандаши',
+  ];
   const colors = ['blue', 'green', 'red', 'black', 'white', 'multi', 'orange', 'purple'];
   const types = ['pen', 'notebook', 'markers', 'pencil', 'ruler'];
-  const brands = ['Parker', 'Lamy', 'ErichKrause', 'Faber-Castell', 'Bic', 'Brauberg'];
+  const brands = ['Parker', 'Lamy', 'ErichKrause', 'Faber-Castell', 'Bic', 'Brauberg', 'gif'];
 
   return {
     id: i + 1, // Уникальный ID (1, 2, 3...)

@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/header/Header';
 import Modal from './components/modal/Modal';
 import Catalog from './page/сatalog/Catalog';
+import Footer from './components/footer/footer';
 import { LoginForm, RegisterForm } from './components/authForms/AuthForms';
 import { ThemeProvider } from './typescript/ThemeContext';
 
@@ -32,6 +33,7 @@ function App() {
           onNavigateToProfile={() => {}}
         />
         <Catalog />
+        <Footer/>
         <Modal
           isOpen={isModalOpen}
           onClose={() => setModalOpen(false)}

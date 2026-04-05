@@ -1,0 +1,112 @@
+/* Основной контейнер футера */
+.footer {
+  background: var(--bg-card); /* Используем цвет карточки для контраста с основным фоном */
+  color: var(--text-main);
+  border-top: 1px solid var(--border-color);
+  padding: 60px 0 20px 0;
+  margin-top: auto; /* Помогает прижимать футер к низу в Flex-контейнерах */
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+
+/* Ограничитель ширины */
+.footer-container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr; /* Блок бренда шире остальных */
+  gap: 40px;
+}
+
+.footer-section h4 {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: var(--accent); /* Заголовки выделяем акцентным цветом */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Описание бренда */
+.footer-logo {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.footer-logo span {
+  color: var(--accent);
+}
+
+.footer-description {
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+/* Списки ссылок */
+.footer-links,
+.footer-contacts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li,
+.footer-contacts li {
+  margin-bottom: 12px;
+}
+
+.footer-links a,
+.footer-contacts a {
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.footer-links a:hover,
+.footer-contacts a:hover {
+  color: var(--accent);
+}
+
+/* Блок соцсетей */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.social-link {
+  background: var(--bg-main);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+}
+
+/* Нижняя полоса */
+.footer-bottom {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr; /* Все блоки в одну колонку */
+    text-align: center;
+  }
+
+  .footer-description {
+    margin: 0 auto;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}

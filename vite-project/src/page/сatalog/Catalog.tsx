@@ -6,7 +6,7 @@ import { MOCK_PRODUCTS } from '../../typescript/mockProducts';
 import { getPaginationRange } from '../../typescript/paginationUtils';
 import './Catalog.css';
 
-const ITEMS_PER_PAGE = 8; // Константа: сколько товаров на одной странице
+const ITEMS_PER_PAGE = 12; // Константа: сколько товаров на одной странице
 
 const getUniqueValues = (data: any[], key: string) => {
   // Map собирает все значения ключа, а Set оставляет только уникальные.
@@ -22,24 +22,26 @@ const Catalog: React.FC = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
 
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+
+  // 1. Извлекаем уникальные бренды (динамически)
+  const brands = useMemo(() => getUniqueValues(MOCK_PRODUCTS, 'brand'), []);
+
   //1. ГЛАВНАЯ ЛОГИКА ФИЛЬТРАЦИИ
-  // Фильтруем массив по поиску + категориям + цветам одновременно.
-  //useMemo кэширует результат. Фильтрация сработает только если изменится searchQuery, selectedCategories, selectedColors.
+  // Фильтруем массив по поиску + категориям + фирмы цветам одновременно.
   const filteredProducts = useMemo(() => {
     return MOCK_PRODUCTS.filter((product) => {
-      // Проверка по поиску
       const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
-
-      // Проверка по категориям: если список пуст — подходят все, если нет — только выбранные
       const matchesCategory =
         selectedCategories.length === 0 || selectedCategories.includes(product.category);
-
-      // Проверка по цветам
       const matchesColor = selectedColors.length === 0 || selectedColors.includes(product.color);
 
-      return matchesSearch && matchesCategory && matchesColor;
+      // НОВАЯ ПРОВЕРКА: по брендам
+      const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
+
+      return matchesSearch && matchesCategory && matchesColor && matchesBrand;
     });
-  }, [searchQuery, selectedCategories, selectedColors]);
+  }, [searchQuery, selectedCategories, selectedColors, selectedBrands]);
 
   // ДИНАМИЧЕСКОЕ ПОЛУЧЕНИЕ СПИСКОВ типов и цветов(Масштабируемость)
   // Эти списки всегда актуальны, даже если товаров станет 10 000
@@ -56,18 +58,16 @@ const Catalog: React.FC = () => {
     setCurrentPage(1); // Всегда сбрасываем на 1-ю страницу при смене фильтра
   };
 
-  /*
-   * 2. РАСЧЕТ ПАГИНАЦИИ
-   */
+  //РАСЧЕТ ПАГИНАЦИИ
+
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
 
   // Если после поиска страниц стало меньше, чем текущая (например, была 5, стала 1),
   // используем 1-ю страницу, чтобы не видеть пустой экран.
   const safeCurrentPage = currentPage > totalPages ? 1 : currentPage;
-  /**
-   * 3. НАРЕЗКА МАССИВА (Slicing)
-   * Берем только те 8 товаров, которые должны быть на текущей странице.
-   */
+  //НАРЕЗКА МАССИВА (Slicing)
+  //Берем только те 8 товаров, которые должны быть на текущей странице.
+
   const currentItems = useMemo(() => {
     const lastIndex = safeCurrentPage * ITEMS_PER_PAGE;
     const firstIndex = lastIndex - ITEMS_PER_PAGE;
@@ -101,7 +101,7 @@ const Catalog: React.FC = () => {
               }}
             />
           </div>
-          {/* Динамические Категории */}
+          {/* Динамические Категории
           <div className="filter-group">
             <h4>Категории</h4>
             {categories.map((cat) => (
@@ -116,8 +116,45 @@ const Catalog: React.FC = () => {
                 {cat}
               </label>
             ))}
-          </div>
+          </div> */}
+          {/* Блок Категории */}
+<div className="filter-group">
+  <h4>Категории</h4>
+  {/* Используем тот же класс со скроллом, что и для брендов */}
+  <div className="filter-scroll-area">
+    {categories.map(cat => (
+      <label key={cat as string} className="filter-checkbox">
+        <input 
+          type="checkbox" 
+          checked={selectedCategories.includes(cat as string)}
+          // toggleFilter — наша универсальная функция, которая 
+          // добавляет или удаляет значение из массива выбранных
+          onChange={() => toggleFilter(cat as string, selectedCategories, setSelectedCategories)}
+        />
+        {/* Отображаем название категории */}
+        <span className="brand-name-text">{cat}</span>
+      </label>
+    ))}
+  </div>
+</div>
 
+          <div className="filter-group">
+            <h4>Бренды</h4>
+            <div className="filter-scroll-area">
+              {brands.map((brand) => (
+                <label key={brand as string} className="filter-checkbox">
+                  <input
+                    type="checkbox"
+                    checked={selectedBrands.includes(brand as string)}
+                    onChange={() =>
+                      toggleFilter(brand as string, selectedBrands, setSelectedBrands)
+                    }
+                  />
+                  <span className="brand-name-text">{brand}</span>
+                </label>
+              ))}
+            </div>
+          </div>
           {/* Динамические Цвета */}
           <div className="filter-group">
             <h4>Цвета</h4>
@@ -148,7 +185,7 @@ const Catalog: React.FC = () => {
           )}
         </aside>
 
-        {/* ОСНОВНАЯ ЧАСТЬ */}
+        {/* отрисовка карточек товаров */}
         <main className="catalog-main">
           <div className="catalog-header">
             <span>Найдено товаров: {filteredProducts.length}</span>

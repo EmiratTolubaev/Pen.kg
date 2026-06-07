@@ -55,3 +55,13 @@ body {
     background-color 0.3s ease,
     color 0.3s ease;
 }
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Растягиваем на всю высоту экрана */
+}
+
+.main-content {
+  flex: 1; /* Эта часть займет всё свободное место, вытолкнув футер вниз */
+}

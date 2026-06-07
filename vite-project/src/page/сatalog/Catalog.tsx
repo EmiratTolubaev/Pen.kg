@@ -101,42 +101,27 @@ const Catalog: React.FC = () => {
               }}
             />
           </div>
-          {/* Динамические Категории
           <div className="filter-group">
             <h4>Категории</h4>
-            {categories.map((cat) => (
-              <label key={cat} className="filter-checkbox">
-                <input
-                  type="checkbox"
-                  checked={selectedCategories.includes(cat as string)}
-                  onChange={() =>
-                    toggleFilter(cat as string, selectedCategories, setSelectedCategories)
-                  }
-                />
-                {cat}
-              </label>
-            ))}
-          </div> */}
-          {/* Блок Категории */}
-<div className="filter-group">
-  <h4>Категории</h4>
-  {/* Используем тот же класс со скроллом, что и для брендов */}
-  <div className="filter-scroll-area">
-    {categories.map(cat => (
-      <label key={cat as string} className="filter-checkbox">
-        <input 
-          type="checkbox" 
-          checked={selectedCategories.includes(cat as string)}
-          // toggleFilter — наша универсальная функция, которая 
-          // добавляет или удаляет значение из массива выбранных
-          onChange={() => toggleFilter(cat as string, selectedCategories, setSelectedCategories)}
-        />
-        {/* Отображаем название категории */}
-        <span className="brand-name-text">{cat}</span>
-      </label>
-    ))}
-  </div>
-</div>
+            {/* Используем тот же класс со скроллом, что и для брендов */}
+            <div className="filter-scroll-area">
+              {categories.map((cat) => (
+                <label key={cat as string} className="filter-checkbox">
+                  <input
+                    type="checkbox"
+                    checked={selectedCategories.includes(cat as string)}
+                    // toggleFilter — наша универсальная функция, которая
+                    // добавляет или удаляет значение из массива выбранных
+                    onChange={() =>
+                      toggleFilter(cat as string, selectedCategories, setSelectedCategories)
+                    }
+                  />
+                  {/* Отображаем название категории */}
+                  <span className="brand-name-text">{cat}</span>
+                </label>
+              ))}
+            </div>
+          </div>
 
           <div className="filter-group">
             <h4>Бренды</h4>

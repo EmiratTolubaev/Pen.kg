@@ -1,0 +1,136 @@
+.profile-page {
+  padding: 40px 0;
+  min-height: 80vh;
+}
+
+.profile-container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+}
+
+/* Сайдбар профиля */
+.profile-sidebar {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 30px;
+  height: fit-content;
+}
+
+.user-brief {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0 auto 15px;
+}
+
+.profile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-nav button,
+.nav-cart-link {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 12px 15px;
+  border-radius: 10px;
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.profile-nav button.active {
+  background: var(--bg-main);
+  color: var(--accent);
+}
+
+.profile-nav button:hover:not(.active) {
+  color: var(--text-main);
+  background: var(--bg-main);
+}
+
+.nav-cart-link {
+  margin-top: 15px;
+  border-top: 1px solid var(--border-color);
+  color: var(--accent);
+  border-radius: 0;
+}
+
+/* Контентная часть */
+.profile-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 40px;
+}
+
+.profile-section h2 {
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: var(--text-main);
+}
+
+/* Стили таблицы заказов */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table th {
+  text-align: left;
+  padding: 15px;
+  border-bottom: 2px solid var(--border-color);
+  color: var(--text-muted);
+}
+
+.orders-table td {
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status.delivered {
+  background: #e3f9e5;
+  color: #1f7a28;
+}
+.status.processing {
+  background: #fff4e5;
+  color: #b45d00;
+}
+
+@media (max-width: 900px) {
+  .profile-container {
+    grid-template-columns: 1fr;
+  }
+}
